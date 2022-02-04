@@ -1,0 +1,87 @@
+<style>
+    .wrapper {
+        min-height: 80vh;
+        left: 60px;
+    }
+
+.row{
+    margin-left: 20%;
+}
+
+    .form-check-label {
+
+        padding-right: 3%;
+    }
+    h3{
+        margin-left:20%
+    }
+
+    .section {
+        margin-left: 25%;
+        margin-right: 25%
+    }
+</style>
+<div class="view"
+    style="background-image: url('assets/Airoplane logo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+
+    <div class="wrapper">
+        <div class="container ">
+
+
+
+            <div class="container card shadow-lg p-3 mb-5 bg-white rounded">
+                <h3 class="font-weight-bold"> Add Passenger </h3>
+                <section style="border: 2px solid black; padding: 20px; width : 50%;
+          margin-left: 20%;">
+                    
+
+                        <label>First Name : </label>
+                        <input type="text" class="form-control" [(ngModel)]="passenger.firstName"
+                            [ngModelOptions]="{standalone: true}" id="availableSeats" required>
+                        <div class="invalid-feedback">Please fill out this field.</div>
+                        <br>
+                        <label>Last Name : </label>
+                        <input type="text" class="form-control" [(ngModel)]="passenger.lastName"
+                            [ngModelOptions]="{standalone: true}" id="schedule" required>
+                        <br>
+                        <label>Age : </label>
+                        <input type="number" class="form-control" [(ngModel)]="passenger.age"
+                            [ngModelOptions]="{standalone: true}" id="schedule" required>
+                        <br>
+                        <label>Gender : </label>
+                        <input type="text" class="form-control" [(ngModel)]="passenger.gender"
+                            [ngModelOptions]="{standalone: true}" id="schedule" required>
+                        <br>
+                        <label>Seat No : </label>
+                        <input type="text" class="form-control" [(ngModel)]="passenger.seatNo"
+                            [ngModelOptions]="{standalone: true}" id="schedule" required>
+                        <br>
+
+
+
+                   
+                </section><br>
+                <div class="row">
+                <div class="col-md-3 offset-md-9">
+                    <input type="submit" class="confBtn btn btn-success"
+                        (click)=" addPassenger(passenger) " value="ADD">
+                </div>
+
+                <div class="col-md-3 offset-md-9">
+                
+                    <input type="submit" class="confBtn btn btn-success"
+                    (click)="back()" value="BACK">
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+
+    <footer class="navbar navbar-light bg-light" style="padding: 10px;">
+
+        <span style="float: right;"></span>
+    </footer>
+</div>

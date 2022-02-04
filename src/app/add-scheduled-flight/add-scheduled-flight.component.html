@@ -1,0 +1,118 @@
+<style>
+    .wrapper{
+    min-height: 90vh;
+  }
+  a{
+     color: red;
+     margin: 10px;
+     margin-left: 70px;
+     font-size: 18px;
+    font-weight: bold;
+    padding: 1000px;
+    }
+    h3{
+      margin-left:25%;
+    }
+    #button{
+      margin-left:25%;
+    }
+    
+    </style>
+ <div class="view" style="background-image: url('assets/Airoplane logo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <!--<nav class="navbar navbar-dark">
+      <div class="navbar-brand">
+        <img src="assets/Airoplane logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+        <b>Flight Reservation System</b>
+    </div>
+    <div>
+    <button type = "button" class ="btn btn-danger pull-right">LOGOUT</button>
+    </div>
+</nav>  -->
+  <div class="wrapper">
+    <div class="container ">
+  
+    <ul class="nav nav-tabs" role="tablist">
+      <li class="nav-item">
+        <a class="nav-link active" data-toggle="tab" href="scheduledFlight/add" (click)="add()" >Schedule A Flight</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="scheduledFlight/show" (click)="view()">Show Scheduled Flights</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="scheduledFlight/search" (click)="search()">Search Scheduled Flight</a>
+      </li>
+     <!-- <li class="nav-item">
+        <a class="nav-link" data-toggle="tab" href="scheduledFlight/modify" (click)="search()">MODIFY</a>
+      </li>-->
+    </ul>
+   <br><br>
+    
+    <div class="container card shadow-lg p-3 mb-5 bg-white rounded">
+      <h3 class="font-weight-bold"> Schedule Flight  </h3><br>
+      <section style="border: 2px solid black; padding: 20px; width:50%;
+      margin-left:25%;margin-right:20%">
+      <form ngNativeValidate #form>
+       <!-- <label>Schedule Flight ID:  :</label>
+        <input (blur)="validateId()" [(ngModel)]="scheduleFlight.flightNo" [ngModelOptions]="{standalone: true}" type="number" class="form-control" id="scheduleFlightId" required>
+        <small *ngIf="idValid" style="color: red;">Invalid ID. Please enter an id between 1 to 999.</small>
+        <br>
+        <label>Airline : </label>
+        <input  #a  type="text" class="form-control" ng-model required>
+        <br>
+        <label>Destination  :</label>
+        <input (blur)="validateAirports(a.value, b.value)"  #b  type="text" class="form-control" required>
+        <small *ngIf="airportValid" style="color: red;">Source and Destination cannot be the same</small>
+        <br>
+        <label>Start Time  :</label>
+        <input  #c   class="dateselect" type="text"  class="form-control" required>
+        <br>-->
+        
+        <label>Flight ID: </label>
+            <input type="number" class="form-control"  [(ngModel)]="scheduleFlight.flightNo" [ngModelOptions]="{standalone: true}" required>
+            <br>
+        <label>Airline : </label>
+            <input type="text" class="form-control"  [(ngModel)]="scheduleFlight.airline" [ngModelOptions]="{standalone: true}" id="airline" required>
+            <div class="invalid-feedback">Please fill out this field.</div>
+            <br>
+            <label>Source : </label>
+            <input type="text" class="form-control"  [(ngModel)]="scheduleFlight.fromPlace" [ngModelOptions]="{standalone: true}" id="source" required>
+            <br>
+            <label>Start Date : </label>
+            <input type="date" class="form-control"  [(ngModel)]="scheduleFlight.startDate" [ngModelOptions]="{standalone: true}" id="startDate" required>
+            <br>
+            <label>endDate Date : </label>
+            <input type="date" class="form-control"  [(ngModel)]="scheduleFlight.endDate" [ngModelOptions]="{standalone: true}" id="endDate" required>
+            <br>
+            <label>Destination : </label>
+            <input type="text" class="form-control"  [(ngModel)]="scheduleFlight.toPlace" [ngModelOptions]="{standalone: true}" id="destination" required>
+            <br>
+            
+            <label>Instrument : </label>
+            <input type="text" class="form-control"  [(ngModel)]="scheduleFlight.instrument" [ngModelOptions]="{standalone: true}" id="instrument" required>
+            <br>
+            <label>No of business class seats :</label>
+            <input type="number" class="form-control"  [(ngModel)]="scheduleFlight.noOfBusinessClassSeats" [ngModelOptions]="{standalone: true}" id="businessClassSeats" required>
+            <br>
+            <label>No of non business class seats :</label>
+            <input type="number" class="form-control"  [(ngModel)]="scheduleFlight.noOfNonBusinessClassSeats" [ngModelOptions]="{standalone: true}" id="nonBusinessClassSeats" required>
+            <br>
+           
+            <label>Cost :</label>
+            <input type="number" class="form-control"  [(ngModel)]="scheduleFlight.cost" [ngModelOptions]="{standalone: true}" id="cost" required>
+            <br>
+          </form>
+            
+      </section><br>
+          <div class="col-md-3 offset-md-9" id="button">
+              <input  type="submit" class="confBtn btn btn-success" (click)="form.checkValidity()? addScheduleFlight(scheduleFlight) : null" value="ADD SCHEDULE FLIGHT">
+          </div>
+      
+        </div>
+      </div>
+    </div>
+ 
+<footer class="navbar navbar-light bg-light" style="padding: 10px;">
+    
+    <span style="float: right;"></span>
+</footer>  
+</div>

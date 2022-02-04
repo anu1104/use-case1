@@ -1,0 +1,99 @@
+<style>
+    .wrapper {
+      min-height: 90vh;
+    }
+  
+    a {
+      color: red;
+      margin: 10px;
+      margin-left: 70px;
+      font-size: 18px;
+      font-weight: bold;
+      padding: 1000px;
+    }
+  
+    .tab {
+      display: inline-block;
+      margin-left: 170px;
+    }
+  
+    
+  
+    label {
+      font-size: 1em;
+    }
+  </style>
+  <div class="view"
+    style="background-image: url('assets/Airoplane logo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+  
+    <div class="wrapper">
+      <div class="container ">
+  
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="bookedFlight/searchFlights" (click)="add()">Search Or Book
+              Flight</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="bookedFlight/show" (click)="view()">Show Or cancel Ticket</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="bookedFlight/search" (click)="search()">Search Booked Ticket</a>
+          </li>
+  
+        </ul>
+        <br><br>
+        <section style="border: 2px solid black; padding: 20px; width : 50%;
+        margin-left: 25%; margin-right:20%;">
+          <div class="booking-form-box">
+  
+  
+            <div class="booking-form">
+              <label>Source</label>
+              <input type="text" class="form-control" placeholder="Enter City Name "
+                [(ngModel)]="searchedFlight.fromPlace" required><br>
+              <label>Destination</label>
+              <input type="text" class="form-control" placeholder="Enter City Name" [(ngModel)]="searchedFlight.toPlace"
+                required><br>
+  
+              <div class="input-grp">
+                <label>Journey Date</label>
+                <input type="date" class="form-control select-date" [(ngModel)]="searchedFlight.date" required>
+              </div>
+  
+             
+              <br>
+              <div *ngFor="let r of radio">
+                <input type="radio" name="radioButtons" value="{{r}}" (change)="radioChanged($event)">
+                <b>{{r}}</b>
+              </div>
+              <br>
+              <div class="input-grp">
+                <button type="button" class="btn btn-primary flight" (click)="searchedFlights(searchedFlight)">Search
+                  Flight</button>
+              </div>
+              <br>
+              <div *ngIf="show">
+                <label>
+                  <h3><b>Flight Details: </b></h3>
+                </label><br>
+                <div *ngFor="let rs of result" class="list-group">
+                  <button type="button" class="btn btn-primary btn-lg btn-block" (click)="getFlightId(rs.flightId)">
+                    <div class="d-flex w-100 justify-content-between">
+                      <h3 class="mb-1">{{rs.flightId}}<span class="tab"></span>{{rs.flightName}}<span
+                          class="tab">&#8377;{{rs.flightPrice}}</span></h3>
+  
+                    </div>
+  
+                  </button>
+                </div>
+              </div>
+            </div>
+            </div>
+        </section>
+      </div>
+    </div>
+    <footer class="navbar navbar-light bg-light" style="padding: 10px;">
+  
+      <span style="float: right;"></span>
+    </footer>

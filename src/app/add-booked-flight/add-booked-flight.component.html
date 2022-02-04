@@ -1,0 +1,175 @@
+<style>
+    .wrapper {
+      min-height: 80vh;
+     left : 60px;
+    }
+  
+    a {
+      color: red;
+       margin: 10px;
+       margin-left: 70px;
+       font-size: 18px;
+      font-weight: bold;
+      padding: 1000px;
+    }
+    h2{
+      margin-left:20%;
+    }
+    .col-md-3 offset-md-9{
+      margin-left:20%;
+    }
+  
+    .nav-link active{
+      color :thistle;
+    }
+  
+    #button {
+  
+      margin-left: 20%;
+    }
+    .section{
+      margin-left: 25% ;
+      margin-right:25%
+    }
+  </style>
+  <div class="view"
+    style="background-image: url('assets/Airoplane logo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+    <!--<nav class="navbar navbar-dark">
+      <div class="navbar-brand">
+        <img src="assets/Airoplane logo.png" width="40" height="40" class="d-inline-block align-top" alt="">
+        <b>Flight Reservation System</b>
+      </div>
+      <div>
+        <button type="button" class="btn btn-danger pull-right">LOGOUT</button>
+      </div>
+    </nav>-->
+    <div class="wrapper">
+      <div class="container ">
+  
+        <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="bookedFlight/searchFlights" (click)="add()">Search Or Book Flight</a>
+          </li>
+          <li class="nav-item">         
+             <a class="nav-link" data-toggle="tab" href="bookedFlight/show" (click)="view()">Show or cancel Ticket</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="bookedFlight/search" (click)="search()">Search Booked Ticket</a>
+          </li>
+         <!-- <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="bookedFlight/modify" (click)="search()">MODIFY</a>
+          </li>-->
+        </ul>
+        <br><br>
+  
+        <div class="container card shadow-lg p-3 mb-5 bg-white rounded">
+          <h2><b>Book Flight Ticket</b> </h2>
+          <section style="border: 2px solid black; padding: 20px; width : 50%;
+          margin-left: 20%;">
+            <form ngNativeValidate #form>
+  
+  
+              <label>Flight ID: </label>
+              <input type="number" class="form-control" value={{id}} readonly>
+              <br>
+              <label>Full Name : </label>
+              <input type="text" class="form-control" [(ngModel)]="bookedFlight.name"
+                [ngModelOptions]="{standalone: true}" id="availableSeats" required>
+              <div class="invalid-feedback">Please fill out this field.</div>
+              <br>
+              <label>Email Id : </label>
+              <input type="text" class="form-control" [(ngModel)]="bookedFlight.emailId"
+                [ngModelOptions]="{standalone: true}" id="schedule" required>
+              <br>
+              <label>Journey Date : </label>
+              <input type="date" class="form-control" [(ngModel)]="bookedFlight.journeyDate"
+                [ngModelOptions]="{standalone: true}" id="schedule" required>
+              <br>
+              <label>Source : </label>
+              <input type="text" class="form-control" [(ngModel)]="bookedFlight.source"
+                [ngModelOptions]="{standalone: true}" id="schedule" required>
+              <br>
+              <label>Destination : </label>
+              <input type="text" class="form-control" [(ngModel)]="bookedFlight.destination"
+                [ngModelOptions]="{standalone: true}" id="schedule" required>
+              <br>
+  
+          <label>Add Passengers : </label><br>
+  
+           <input type="submit" class="confBtn btn btn-success"
+           (click)="addPassenger()" value="Add">
+  <br><br>
+           
+           <table border="1" class="table table-striped table-dark">
+            <thead class="thead-dark">
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Gender</th>
+                    <th>Age</th>
+                    <th>Seat No</th>
+                  </thead>
+                
+                <tr *ngFor="let p of passengerList">
+                  <td>{{p.firstName}}</td>
+                  <td>{{p.lastName}}</td>
+                  <td>{{p.gender}}</td>
+                  <td>{{p.age}}</td>
+                  <td>{{p.seatNo}}</td>
+                </tr>
+            </table>
+          
+  
+  
+              <label>No Of Passengers :</label>
+              <input type="number" class="form-control" [(ngModel)]="bookedFlight.noOfPassenger"
+                [ngModelOptions]="{standalone: true}" id="schedule" required>
+              <br>
+  
+              
+              <label>Meal :</label>
+              <div class="form-check">
+                <!--<input class="form-check-input" type="radio" id="flexRadioDefault1" [(ngModel)]="bookedFlight.meal"[ngModelOptions]="{standalone: true}" />
+                <label class="form-check-label" for="flexRadioDefault1"> Yes </label>
+  
+                <input class="form-check-input" type="radio" id="flexRadioDefault2" [(ngModel)]="bookedFlight.meal"[ngModelOptions]="{standalone: true}"  />
+                <label class="form-check-label" for="flexRadioDefault2"> No </label>-->
+  
+                <div *ngFor ="let r of radio">
+                  <input type="radio" name="radioButtons" value ="{{r}}"
+                  (change)="radioChanged($event)">
+                  <b>{{r}}</b>
+                </div>
+                <!--<p><span>you selected :</span><b>{{radioSelected}}</b></p>-->
+              </div>
+  
+              <br>
+  
+              <label>Select Type Of Meal :</label>
+              <div class="dropdown">
+                <select (change)="onDataSelected($event)" >
+                  <option value="Choose a Value">Choose a Value</option>
+                  <option value="VEG">VEG</option>
+                  <option value="NON-VEG">NON-VEG</option>
+                   
+                </select>
+                
+              </div>
+            </form>
+          </section><br>
+         
+              <div class="col-md-3 offset-md-9" id="button">
+                <input type="submit" class="confBtn btn btn-success"
+                  (click)="form.checkValidity()? addBookedFlight(bookedFlight) : null" value="ADD BOOKED TICKET">
+              </div>
+             
+        
+          
+        </div>
+      </div>
+    </div>
+  
+    <footer class="navbar navbar-light bg-light" style="padding: 10px;">
+      
+      <span style="float: right;"></span>
+  </footer>
+  </div>

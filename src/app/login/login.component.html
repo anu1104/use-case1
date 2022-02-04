@@ -1,0 +1,46 @@
+<style>
+    mat-error{
+        color: red;
+    }
+    a{
+        color:white;
+    }
+</style>
+
+
+<div class="container">
+    <div class="row">
+        <div class="card col-md-4 offset-md-4 shadow-lg p-3 mb-5 bg-white">
+            <h3 style="margin-top: 20px;">Login Details</h3>
+            
+            <div class="row">
+                User Name : <input class="form-control" type="text" [(ngModel)] ="username" name="username" >
+            </div>
+            <div class="row">
+                Password : <input class="form-control" type="password" [(ngModel)]="password" name="password">
+            </div>
+            <br>
+            <div class="row">
+                <button (click)=checkLogin(username,password) class="logInBtn btn btn-success">
+                    Login
+                  </button><br>
+                 <!-- <mat-error *ngIf="invalidLogin">{{message}}</mat-error>-->
+            </div>
+            
+            <div class="row">
+                <span style="margin-left: auto; margin-right: auto;">
+                    OR<br>
+                    Sign Up for a new account
+                </span>
+            </div>
+            <br>
+            <div class="row">
+                <button type="button" class="btn btn-primary signUpBtn">
+                  <a href="signup">SIGN UP</a>
+                </button>
+            </div>
+            
+        </div>
+    </div>
+  </div>
+  

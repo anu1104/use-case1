@@ -1,0 +1,100 @@
+<style>
+    .wrapper{
+      min-height: 90vh;
+    }
+    a{
+      color: red;
+     margin: 10px;
+     margin-left: 70px;
+     font-size: 18px;
+    font-weight: bold;
+    padding: 1000px;
+    }
+
+   h3{
+     margin-left:25%;
+   }
+  </style>
+   <div class="view" style="background-image: url('assets/Airoplane logo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
+  <!--<nav class="navbar navbar-dark">
+      <div class="navbar-brand">
+        <img src="assets/aeroplane.png" width="40" height="40" class="d-inline-block align-top" alt="">
+        <b>Flight Reservation System</b>
+      </div>
+      <div>
+      <button type = "button" class ="btn btn-danger pull-right">LOGOUT</button>
+      </div>
+  </nav>-->
+  <div class="wrapper">
+    <div class="container ">
+      <ul class="nav nav-tabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link " data-toggle="tab" href="scheduledFlight/add" (click)="add()" >Schedule A Flight</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="scheduledFlight/show" (click)="view()">Show Scheduled Flights</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="scheduledFlight/search" (click)="search()">Search Scheduled Flight</a>
+          </li>
+         <!-- <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="scheduledFlight/modify" (click)="search()">MODIFY</a>
+          </li>-->
+      </ul>
+        <br><br>
+        
+        <div class="container card shadow-lg p-3 mb-5 bg-white rounded">
+          <h3 class="font-weight-bold">Search Schedule Flights</h3><br>
+          <section style="border: 2px solid black; padding: 20px; width:50%;
+          margin-left:25%;">
+            <form>
+                <label id="label">Schedule Flight ID: </label>
+                <input (blur)="validateId()" type="Number" class="form-control" type="Number" [(ngModel)]="flightNo" [ngModelOptions]="{standalone: true}"   required>
+                <small *ngIf="idValid" style="color: red;">Invalid ID. Please enter an id between 1 to 999.</small><br>
+                <input type="submit" value="SEARCH" class="btn btn-primary" (click)="searchScheduleFlight(flightNo)" [disabled]="!flightNo">
+                <br><br>
+                <div *ngIf="show">
+                <label><b>Details: </b></label><br>
+                <label>Airline : </label>
+                <input type="text" class="form-control" value={{scheduleFlight.airline}} readonly>
+                <br>
+                <label>Source : </label>
+                <input type="text" class="form-control" value={{scheduleFlight.fromPlace}} readonly>       
+                <br>
+                <label>Destination : </label>
+                <input type="text" class="form-control" value={{scheduleFlight.toPlace}} readonly>
+                <br>
+                <label>Start Date : </label>
+                <input type="text" class="form-control" value={{scheduleFlight.startDate}} readonly>
+                <br>
+                <label>End Date : </label>
+                <input type="text" class="form-control" value={{scheduleFlight.endDate}} readonly>
+                <br>
+                
+                <label>Scheduled days: </label>
+                <input type="text" class="form-control" value={{scheduleFlight}} readonly>
+                <br>
+                <label>Instrument : </label>
+                <input type="text" class="form-control" value={{scheduleFlight.instrument}} readonly>
+                <br>
+                <label>No of business class seats: </label>
+                <input type="text" class="form-control" value={{scheduleFlight.noOfBusinessClassSeats}} readonly>
+                <br>
+                <label>No of non-business class seats : </label>
+                <input type="text" class="form-control" value={{scheduleFlight.noOfNonBusinessClassSeats}} readonly>
+                <br>
+                <label>Cost : </label>
+                <input type="text" class="form-control" value={{scheduleFlight.cost}} readonly>
+                
+                <br>
+              </div>
+          </form>
+        </section>
+        </div>
+      </div>   
+  </div>
+  <footer class="navbar navbar-light bg-light" style="padding: 10px;">
+    
+    <span style="float: right;"></span>
+</footer>
+  </div>
