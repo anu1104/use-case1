@@ -58,7 +58,10 @@ export class ScheduledFlightService  {
     return this.http.delete(this.url+'/airline/inventory/block/'+flightNo
     );
  }
-
  
+ uploadLogo(uploadImageData:any,flightName:any):any{
+ return  this.http.post(this.url+'/image/upload/'+flightName, uploadImageData)
+  
+ }
 
 }

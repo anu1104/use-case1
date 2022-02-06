@@ -24,6 +24,12 @@ export class PassengerComponent implements OnInit {
 
     public passengerList : Passenger[]=[];
 
+    radio : any=['FEMALE','MALE'];
+    radioSelected : string ='';
+    dataSelected : string ='';
+    seatList:string[]=['1A','2A','3A','4A','5A','1B','2B','3B','4B','5B',
+       '1C','2C','3C','4C','5C','1D','2D','3D','4D','5D'];
+
     /*onNoClick():void{
       this.dialogRef.close();
     }*/
@@ -45,9 +51,20 @@ export class PassengerComponent implements OnInit {
 
   addPassenger(passenger: Passenger){
   //  this.passengerList.push(passenger);
+  this.passenger.gender=this.radioSelected;
+  this.passenger.seatNo=this.dataSelected;
     console.log( this.passenger);
     sessionStorage.setItem('passengerList',JSON.stringify(this.passenger));
   }
+
+  radioChanged(event : any){
+    this.radioSelected= event.target.value;
+  }
+
+  onDataSelected(event:any){
+    this.dataSelected=event.target.value;
+  }
+
 
   back(){
     this.router.navigate(['/bookedFlight/add'],{queryParams :{list :this.passengerList }});

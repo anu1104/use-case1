@@ -30,6 +30,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { PassengerService } from './services/passenger.service';
+//import { DatePipe } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -64,7 +65,8 @@ import { PassengerService } from './services/passenger.service';
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
-    MatButtonModule
+    MatButtonModule,
+    //DatePipe
   ],
   providers: [PassengerService],
   bootstrap: [AppComponent]

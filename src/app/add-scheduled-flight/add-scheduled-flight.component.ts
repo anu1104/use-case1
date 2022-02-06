@@ -11,8 +11,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class AddScheduledFlightComponent implements OnInit {
 
-  scheduleFlight:RequestFlightDetailsDTO=new RequestFlightDetailsDTO(0,'','','','','',[],
+  scheduleFlight:RequestFlightDetailsDTO=new RequestFlightDetailsDTO(0,'','','','','','','','',[],
   '','','','');
+  days:string[] =['Monday','Tuesday','Wedensday','Thursday','Friday','Saturday','Sunday'];
+   
+    value:any;
+    days_selected:any[]=[];
+    selectedFile: any;
+    retrievedImage: any;
+    base64Data: any;
+    retrieveResonse: any;
+    message: any;
+    imageName: any;
 
   //scheduleFlight:ScheduledFlight={scheduleFlightId:null, availableSeats:null, flight:null,schedule:null};
 
@@ -28,11 +38,38 @@ export class AddScheduledFlightComponent implements OnInit {
     }
   }
 
+  public onFileChanged(event: any) {
+    //Select File
+    this.selectedFile = event.target.files[0];
+  }
+
+  onUpload() {
+    console.log(this.selectedFile);
+    const uploadImageData = new FormData();
+    uploadImageData.append('imageFile', this.selectedFile, this.selectedFile.name);
+    this.scheduleFlightService.uploadLogo(uploadImageData,this.scheduleFlight.flightName) .subscribe((response: { status: number; }) => {
+      if (response.status === 200) {
+        this.message = 'Image uploaded successfully';
+      } else {
+        this.message = 'Image not uploaded successfully';
+      }
+    }
+    );
+  }
+
   addScheduleFlight(scheduleFlight: RequestFlightDetailsDTO){
    // alert(sa+da+ ddt+ adt);
-    
+   scheduleFlight.scheduledDays=this.days_selected;
     this.scheduleFlightService.addScheduleFlight( scheduleFlight).subscribe();
     alert("Schedule Flight added");
+  }
+
+  selected_day(e:any){
+    if (e.target.checked) {
+        this.value = e.target.value;
+        this.days_selected.push(this.value);
+    }
+    console.log(this.days_selected);
   }
 
   idValid:boolean=false;

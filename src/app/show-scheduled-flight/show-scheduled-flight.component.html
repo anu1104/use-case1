@@ -3,20 +3,32 @@
       min-height: 90vh;
     }
     a{
-      color: red;
+    color: black;
      margin: 10px;
      margin-left: 70px;
-     font-size: 18px;
+     font-size: 16px;
     font-weight: bold;
     padding: 1000px;
     }
     #table{
       width:60%;
-      margin-left:15%;
+      margin-left:0%;
     }
 
     h3{
-      margin-left:15%;
+      margin-left:0%;
+      font-size: 18px;
+    }
+    table{
+      border: 1px solid black;
+      background-color: rgb(147, 199, 201);
+    }
+    th{
+      background-color: darkcyan;
+      text-align: center;
+    }
+    td{
+      text-align: center;
     }
   </style>
   <div class="view" style="background-image: url('assets/Airoplane logo.jpg'); background-repeat: no-repeat; background-size: cover; background-position: center center;">
@@ -34,29 +46,33 @@
     
       <ul class="nav nav-tabs" role="tablist">
         <li class="nav-item">
-          <a class="nav-link " data-toggle="tab" href="scheduledFlight/add" (click)="add()" >Schedule A Flight</a>
+          <a class="nav-link " data-toggle="tab" href="scheduledFlight/add" (click)="add()" >SCHEDULE A FLIGHT</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link active" data-toggle="tab" href="scheduledFlight/show" (click)="view()">Show Scheduled Flights</a>
+          <a class="nav-link active" data-toggle="tab" href="scheduledFlight/show" (click)="view()">SHOW SCHEDULED FLIGHTS</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" data-toggle="tab" href="scheduledFlight/search" (click)="search()">Search Scheduled Flight</a>
+          <a class="nav-link" data-toggle="tab" href="scheduledFlight/search" (click)="search()">SEARCH SCHEDULED FLIGHT</a>
         </li>
        <!-- <li class="nav-item">
           <a class="nav-link" data-toggle="tab" href="scheduledFlight/modify" (click)="search()">MODIFY</a>
         </li>-->
       </ul>
       <br><br>
-      <h3 class="font-weight-bold">Show Scheduled Flights</h3>
+      <h3 class="font-weight-bold"><b> Scheduled Flights </b></h3>
       <table border="1" class="table table-striped table-dark" id="table">
           <thead class="thead-dark">
               <tr>
                   <th>Schedule Flight Number</th>
+                  <th> Flight Name</th>
                   <th>Airline Name</th>
                   <th>Source </th>
                   <th>Destination </th>
                   <th>Start Date</th>
                   <th>End Date</th>
+                  <th>Boarding Time</th>
+                  <th>Departure Time </th>
+                  <th>Scheduled Days</th>
                   <th>Available Business Class Seats</th>
                   <th>Available Non Business Class Seats</th>
                   <th>Cost</th>
@@ -65,11 +81,15 @@
           </thead>
           <tr *ngFor="let sf of scheduleFlights">
               <td>{{sf.flightNo}}</td>
+              <td>{{sf.flightName}}</td>
               <td>{{sf.airline}}</td>
               <td>{{sf.fromPlace}}</td>
               <td>{{sf.toPlace}}</td>
-              <td>{{sf.startDate}}</td>
-              <td>{{sf.endDate}}</td>
+              <td>{{sf.startDate | date: 'yyyy/MM/dd'}}</td>
+              <td>{{sf.endDate | date: 'yyyy/MM/dd'}}</td>
+              <td>{{sf.boardingTime}}</td>
+              <td>{{sf.departureTime}}</td>
+              <td>{{sf.scheduledDays}}</td>
               <td>{{sf.noOfBusinessClassSeats}}</td>
               <td>{{sf.noOfNonBusinessClassSeats}}</td>
               <td>{{sf.cost}}</td>

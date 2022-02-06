@@ -49,12 +49,20 @@
                             [ngModelOptions]="{standalone: true}" id="schedule" required>
                         <br>
                         <label>Gender : </label>
-                        <input type="text" class="form-control" [(ngModel)]="passenger.gender"
-                            [ngModelOptions]="{standalone: true}" id="schedule" required>
+                        <div *ngFor="let r of radio">
+                            <input type="radio" name="radioButtons" value="{{r}}" (change)="radioChanged($event)">
+                            <b>{{r}}</b>
+                          </div>
                         <br>
                         <label>Seat No : </label>
-                        <input type="text" class="form-control" [(ngModel)]="passenger.seatNo"
-                            [ngModelOptions]="{standalone: true}" id="schedule" required>
+                        <div class="dropdown">
+                            <select  class="form-control" (change)="onDataSelected($event)">
+                                  
+                                <option>Choose seat no</option>  
+                                <option *ngFor="let c of seatList">{{c}}</option>  
+                            </select>  
+                            
+                          </div>
                         <br>
 
 

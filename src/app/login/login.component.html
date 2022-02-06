@@ -11,7 +11,7 @@
 <div class="container">
     <div class="row">
         <div class="card col-md-4 offset-md-4 shadow-lg p-3 mb-5 bg-white">
-            <h3 style="margin-top: 20px;">Login Details</h3>
+            <h2 style="margin-top: 20px;"><b>Login Here!!!!</b></h2>
             
             <div class="row">
                 User Name : <input class="form-control" type="text" [(ngModel)] ="username" name="username" >
@@ -24,7 +24,7 @@
                 <button (click)=checkLogin(username,password) class="logInBtn btn btn-success">
                     Login
                   </button><br>
-                 <!-- <mat-error *ngIf="invalidLogin">{{message}}</mat-error>-->
+                  <mat-error *ngIf="invalidLogin">{{message}}</mat-error>
             </div>
             
             <div class="row">

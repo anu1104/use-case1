@@ -14,6 +14,10 @@ import { BrowserAnimationsModule ,NoopAnimationsModule} from '@angular/platform-
   styleUrls: ['./search-flights.component.css']
 })
 export class SearchFlightsComponent implements OnInit {
+  retrieveResonse: any;
+  base64Data: any;
+  retrievedImage: any;
+  
 
   constructor(public bookFlightService: BookedFlightService, public router: Router, public route: ActivatedRoute,
     public searchFlightservice : SearchFlightsService ) {
@@ -22,8 +26,9 @@ export class SearchFlightsComponent implements OnInit {
 
   result: SearchFlightResultDTO[] = [];
   show: boolean=false;
+  public date:Date=new Date();
   radioSelected : string ='';
- radio : any=['One-Way','Two-Way'];
+  radio : any=['One-Way','Two-Way'];
 
   searchedFlight: SearchFlightDTO = new SearchFlightDTO('', '', new Date(), '', '');
 
@@ -39,6 +44,7 @@ export class SearchFlightsComponent implements OnInit {
 
   radioChanged(event : any){
     this.radioSelected= event.target.value;
+    console.log(this.radioSelected);
   }
 
 
@@ -57,16 +63,37 @@ export class SearchFlightsComponent implements OnInit {
 
     this.bookFlightService.searchFlight(searchedFlight).subscribe(
       (data: SearchFlightResultDTO[]) => this.result = data
-  
+           
       );
+      
+      //searchFlightservice.getFlightLogo(this.result.flightName);
       this.show=true;
+      sessionStorage.setItem('source',searchedFlight.fromPlace);
+      sessionStorage.setItem('destination',searchedFlight.toPlace);
+      //sessionStorage.setItem('date',searchedFlight.date);
+      this.date=searchedFlight.date;
+      console.log(this.result);
 
     //  alert("Flight Ticket Created");
 
   }
+
+  getFlightLogo(flightName:any){
+    this.searchFlightservice.getFlightLogo(flightName).subscribe(
+      ( res: any) => {
+        this.retrieveResonse = res;
+        this.base64Data = this.retrieveResonse.picByte;
+        this.retrievedImage = 'data:image/jpeg;base64,' + this.base64Data;
+        console.log(this.retrievedImage);
+      }
+    );
+   return this.retrievedImage;
+  }
+
+
   getFlightId(flightId: number) {
 
-    this.router.navigate(['/bookedFlight/add'], {queryParams: {data : flightId}});
+    this.router.navigate(['/bookedFlight/add'], {queryParams: {data : flightId, date : this.date}});
     sessionStorage.setItem('Id',flightId.toString());
 
   }

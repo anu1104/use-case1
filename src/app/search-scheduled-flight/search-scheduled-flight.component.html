@@ -3,15 +3,18 @@
       min-height: 90vh;
     }
     a{
-      color: red;
+      color: black;
      margin: 10px;
      margin-left: 70px;
-     font-size: 18px;
+     font-size: 16px;
     font-weight: bold;
     padding: 1000px;
     }
+    section{
+      background-color: rgb(147, 199, 201);
+    }
 
-   h3{
+   h2{
      margin-left:25%;
    }
   </style>
@@ -29,13 +32,13 @@
     <div class="container ">
       <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item">
-            <a class="nav-link " data-toggle="tab" href="scheduledFlight/add" (click)="add()" >Schedule A Flight</a>
+            <a class="nav-link " data-toggle="tab" href="scheduledFlight/add" (click)="add()" >SCHEDULE A FLIGHT</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="scheduledFlight/show" (click)="view()">Show Scheduled Flights</a>
+            <a class="nav-link" data-toggle="tab" href="scheduledFlight/show" (click)="view()">SHOW SCHEDULED FLIGHTS</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="scheduledFlight/search" (click)="search()">Search Scheduled Flight</a>
+            <a class="nav-link active" data-toggle="tab" href="scheduledFlight/search" (click)="search()">SEARCH SCHEDULED FLIGHT</a>
           </li>
          <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="scheduledFlight/modify" (click)="search()">MODIFY</a>
@@ -44,17 +47,22 @@
         <br><br>
         
         <div class="container card shadow-lg p-3 mb-5 bg-white rounded">
-          <h3 class="font-weight-bold">Search Schedule Flights</h3><br>
+          <h2 class="font-weight-bold"><b>Schedule Flight</b> </h2><br>
           <section style="border: 2px solid black; padding: 20px; width:50%;
           margin-left:25%;">
             <form>
+              <div id="id">
                 <label id="label">Schedule Flight ID: </label>
                 <input (blur)="validateId()" type="Number" class="form-control" type="Number" [(ngModel)]="flightNo" [ngModelOptions]="{standalone: true}"   required>
-                <small *ngIf="idValid" style="color: red;">Invalid ID. Please enter an id between 1 to 999.</small><br>
+                <small *ngIf="idValid" style="color: red;">Invalid ID. Please enter an id between 1 to 9999.</small><br>
                 <input type="submit" value="SEARCH" class="btn btn-primary" (click)="searchScheduleFlight(flightNo)" [disabled]="!flightNo">
+              </div>
                 <br><br>
                 <div *ngIf="show">
                 <label><b>Details: </b></label><br>
+                <label>Flight Name : </label>
+                <input type="text" class="form-control" value={{scheduleFlight.flightName}} readonly>
+                <br>
                 <label>Airline : </label>
                 <input type="text" class="form-control" value={{scheduleFlight.airline}} readonly>
                 <br>
@@ -65,14 +73,19 @@
                 <input type="text" class="form-control" value={{scheduleFlight.toPlace}} readonly>
                 <br>
                 <label>Start Date : </label>
-                <input type="text" class="form-control" value={{scheduleFlight.startDate}} readonly>
+                <input type="text" class="form-control" [value]="scheduleFlight.startDate | date: 'yyyy/MM/dd'" readonly>
                 <br>
                 <label>End Date : </label>
-                <input type="text" class="form-control" value={{scheduleFlight.endDate}} readonly>
+                <input type="text" class="form-control" [value]="scheduleFlight.endDate | date :'yyyy/MM/dd'" readonly>
                 <br>
-                
+                <label>Boarding Time : </label>
+                <input type="time" class="form-control" value={{scheduleFlight.boardingTime}} readonly>
+                <br>
+                <label>Departure Time : </label>
+                <input type="time" class="form-control" value={{scheduleFlight.departureTime}} readonly>
+                <br>
                 <label>Scheduled days: </label>
-                <input type="text" class="form-control" value={{scheduleFlight}} readonly>
+                <input type="text" class="form-control" value={{scheduleFlight.scheduledDays}} readonly>
                 <br>
                 <label>Instrument : </label>
                 <input type="text" class="form-control" value={{scheduleFlight.instrument}} readonly>

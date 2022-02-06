@@ -3,18 +3,26 @@
     min-height: 90vh;
   }
   a{
-     color: red;
+     color: BLACK;
      margin: 10px;
      margin-left: 70px;
-     font-size: 18px;
+     font-size: 16px;
     font-weight: bold;
     padding: 1000px;
     }
-    h3{
+    h2{
       margin-left:25%;
     }
     #button{
       margin-left:25%;
+    }
+    section{
+    background-color: rgb(147, 199, 201);
+    }
+    #up{
+      background-color: rgb(13, 106, 160);
+      
+      width: 15%;
     }
     
     </style>
@@ -33,13 +41,13 @@
   
     <ul class="nav nav-tabs" role="tablist">
       <li class="nav-item">
-        <a class="nav-link active" data-toggle="tab" href="scheduledFlight/add" (click)="add()" >Schedule A Flight</a>
+        <a class="nav-link active" data-toggle="tab" href="scheduledFlight/add" (click)="add()" >SCHEDULE A FLIGHT</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="scheduledFlight/show" (click)="view()">Show Scheduled Flights</a>
+        <a class="nav-link" data-toggle="tab" href="scheduledFlight/show" (click)="view()">SHOW SCHEDULED FLIGHTS</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" data-toggle="tab" href="scheduledFlight/search" (click)="search()">Search Scheduled Flight</a>
+        <a class="nav-link" data-toggle="tab" href="scheduledFlight/search" (click)="search()">SEARCH SCHEDULED FLIGHT</a>
       </li>
      <!-- <li class="nav-item">
         <a class="nav-link" data-toggle="tab" href="scheduledFlight/modify" (click)="search()">MODIFY</a>
@@ -48,7 +56,7 @@
    <br><br>
     
     <div class="container card shadow-lg p-3 mb-5 bg-white rounded">
-      <h3 class="font-weight-bold"> Schedule Flight  </h3><br>
+      <h2 class="font-weight-bold"><b> Schedule Flight </b> </h2><br>
       <section style="border: 2px solid black; padding: 20px; width:50%;
       margin-left:25%;margin-right:20%">
       <form ngNativeValidate #form>
@@ -70,6 +78,10 @@
         <label>Flight ID: </label>
             <input type="number" class="form-control"  [(ngModel)]="scheduleFlight.flightNo" [ngModelOptions]="{standalone: true}" required>
             <br>
+            <label>Flight Name : </label>
+            <input type="text" class="form-control"  [(ngModel)]="scheduleFlight.flightName" [ngModelOptions]="{standalone: true}" id="flightName" required>
+            
+            <br>
         <label>Airline : </label>
             <input type="text" class="form-control"  [(ngModel)]="scheduleFlight.airline" [ngModelOptions]="{standalone: true}" id="airline" required>
             <div class="invalid-feedback">Please fill out this field.</div>
@@ -77,16 +89,48 @@
             <label>Source : </label>
             <input type="text" class="form-control"  [(ngModel)]="scheduleFlight.fromPlace" [ngModelOptions]="{standalone: true}" id="source" required>
             <br>
-            <label>Start Date : </label>
-            <input type="date" class="form-control"  [(ngModel)]="scheduleFlight.startDate" [ngModelOptions]="{standalone: true}" id="startDate" required>
-            <br>
-            <label>endDate Date : </label>
-            <input type="date" class="form-control"  [(ngModel)]="scheduleFlight.endDate" [ngModelOptions]="{standalone: true}" id="endDate" required>
-            <br>
             <label>Destination : </label>
             <input type="text" class="form-control"  [(ngModel)]="scheduleFlight.toPlace" [ngModelOptions]="{standalone: true}" id="destination" required>
             <br>
-            
+            <label>Start Date : </label>
+            <input type="date" class="form-control"  [(ngModel)]="scheduleFlight.startDate" [ngModelOptions]="{standalone: true}" id="startDate" required>
+            <br>
+            <label>End Date : </label>
+            <input type="date" class="form-control"  [(ngModel)]="scheduleFlight.endDate" [ngModelOptions]="{standalone: true}" id="endDate" required>
+            <br>
+            <label>Boarding Time : </label>
+            <input type="time" class="form-control"  [(ngModel)]="scheduleFlight.boardingTime" [ngModelOptions]="{standalone: true}" id="boardingTime" required>
+            <br>
+            <label>Departure Time : </label>
+            <input type="time" class="form-control"  [(ngModel)]="scheduleFlight.departureTime" [ngModelOptions]="{standalone: true}" id="departureTime" required>
+            <br>
+            <label> Scheduled Days: </label>
+            <div *ngFor="let day of days" id="form_charts">
+              <input type="checkbox" value="{{day}}" (change)="selected_day($event)">
+              <b>{{day}}</b>
+              <span class="checkmark"></span>
+              
+            </div>
+              <br>
+                <label>Upload Logo : </label>
+           
+          
+          <div class="container row">
+              <!--<div class="col-md-6">-->
+                  <input type="file" (change)="onFileChanged($event)">
+          
+             <!-- </div>--><br>
+              <div class="col-md-6">
+                  <input type="button" id="up" (click)="onUpload()" value="upload">
+              </div>
+          </div>
+          <!--<hr />-->
+          <div class="container row">
+              <div class="col-md-12">
+                  <div *ngIf=message>{{message}}</div>
+              </div>
+          </div>
+          <br>
             <label>Instrument : </label>
             <input type="text" class="form-control"  [(ngModel)]="scheduleFlight.instrument" [ngModelOptions]="{standalone: true}" id="instrument" required>
             <br>

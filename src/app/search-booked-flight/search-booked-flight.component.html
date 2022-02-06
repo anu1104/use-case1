@@ -4,12 +4,15 @@
     }
   
     a {
-      color: red;
+      color: black;
        margin: 10px;
        margin-left: 70px;
-       font-size: 18px;
+       font-size: 16px;
       font-weight: bold;
       padding: 1000px;
+    }
+    section{
+      background-color: rgb(147, 199, 201);
     }
     #cont{
       margin-left:20%;
@@ -32,13 +35,13 @@
       <div class="container ">
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item">
-            <a class="nav-link " data-toggle="tab" href="bookedFlight/searchFlights" (click)="add()">Search Or Book Flight</a>
+            <a class="nav-link " data-toggle="tab" href="bookedFlight/searchFlights" (click)="add()">SEARCH OR BOOK FLIGHT</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="bookedFlight/show" (click)="view()">Show or cancel Ticket</a>
+            <a class="nav-link" data-toggle="tab" href="bookedFlight/show" (click)="view()">SHOW TICKET HISTORY</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="bookedFlight/search" (click)="search()">Search Booked Ticket</a>
+            <a class="nav-link active" data-toggle="tab" href="bookedFlight/search" (click)="search()">SEARCH BOOKED TICKET</a>
           </li>
          <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="bookedFlight/modify" (click)="search()">MODIFY</a>
@@ -47,7 +50,7 @@
         <br><br>
   
         <div class="container card shadow-lg p-3 mb-5 bg-white rounded" id="cont">
-          <h3 class="font-weight-bold">Search Flight Ticket</h3>
+          <h3 class="font-weight-bold"><b>Search Flight Ticket</b></h3>
           <section style="border: 2px solid black; padding: 20px;">
             <form>
               <label>Enter PNR Number : </label>
@@ -80,6 +83,15 @@
                 <br>
                 <label>Destination : </label>
                 <input type="text" class="form-control" value={{response.destination}} readonly>
+                <br>
+                <label>Gender : </label>
+                <input type="text" class="form-control" value={{response.gender}} readonly>
+                <br>
+                <label>Age : </label>
+                <input type="text" class="form-control" value={{response.age}} readonly>
+                <br>
+                <label>Seat No : </label>
+                <input type="text" class="form-control" value={{response.seatNo}} readonly>
                 <br>
                 <label>Passengers : </label>
                <!--<input type="text" class="form-control" value={{response.destination}} readonly>--> 
@@ -115,9 +127,10 @@
                 <input type="text" class="form-control" value={{response.typeOfMeal}} readonly>
                 <br>
                 <br>
-  
-                <!-- <button type="button" (click)="removeBookedFlight(pNR_Number)" class="cncBtn btn btn-danger">Cancel Flight</button> -->
+            <div *ngIf="cancel">
+                 <button type="button" (click)="removeBookedFlight(pNR_Number)" class="cncBtn btn btn-danger">CANCEL TICKET</button>
               </div>
+            </div>
             </form>
           </section>
         </div>

@@ -34,21 +34,29 @@ export class AddBookedFlightComponent implements OnInit {
   }
   
   isPopupOpened = true;
- dataSelected : string='';
- radioSelected : string ='';
- radio : any=['YES','NO'];
-   mappedValue: string='';
-  
+  dataSelected : string='';
+  radioSelected : string ='';
+  radio : any=['YES','NO'];
+  mappedValue: string='';
+  tableFlag=false;
   displayedColumns: string[] = ['firstName', 'lastName', 'gender', 'age', 'seatNo'];
   dataSource = ELEMENT_DATA;
-   passenger : any ;
-   passengerList : Passenger[]=[];
-passengers:string='';
-passenger1 : any;
- 
+  passenger : any ;
+  passengerList : Passenger[]=[];
+  passengers:string='';
+  passenger1 : any;
+  radio1 : any=['FEMALE','MALE'];
+    radioSelected1 : string ='';
+    dataSelected1 : string ='';
+    seatList:string[]=['1A','2A','3A','4A','5A','1B','2B','3B','4B','5B',
+       '1C','2C','3C','4C','5C','1D','2D','3D','4D','5D'];
+
   flightId : number=0;
-    id: any ='';
-  bookedFlight: FlightRegistrationDTO= new FlightRegistrationDTO(0,'','',new Date(),'','',[],0,'','');
+  date :any;
+  source:any;
+  destination:any;
+  id: any ='';
+  bookedFlight: FlightRegistrationDTO= new FlightRegistrationDTO(0,'','',new Date(),'','','',0,'',[],0,'','');
 
   ngOnInit(): void {
     
@@ -58,8 +66,12 @@ passenger1 : any;
     }
 
    this.flightId= this.route.snapshot.queryParams['data'];
+   //this.date= this.route.snapshot.queryParams['date'];
  // this.passengerList= this.route.snapshot.queryParams['list'];
    this.id=(sessionStorage.getItem('Id'));
+   this.source=(sessionStorage.getItem('source'));
+   this.destination=(sessionStorage.getItem('destination'));
+   //this.date=(sessionStorage.getItem('date'));
    
    this.passenger= sessionStorage.getItem('passengerList');
 this.passenger1=JSON.parse(this.passenger);
@@ -84,7 +96,7 @@ this.passenger1=JSON.parse(this.passenger);
 
 
 this.router.navigate(['/passenger']);
-  
+  this.tableFlag=true;
 }
 
 
@@ -96,15 +108,30 @@ this.router.navigate(['/passenger']);
     this.radioSelected= event.target.value;
   }
 
+  radioChanged1(event : any){
+    this.radioSelected1= event.target.value;
+  }
+
+  onDataSelected1(event:any){
+    this.dataSelected1=event.target.value;
+  }
+
   addBookedFlight(bookedFlight: FlightRegistrationDTO){
     // alert(sa+da+ ddt+ adt);
     bookedFlight.flightId = this.id;
+    bookedFlight.source=this.source;
+    bookedFlight.destination=this.destination
     bookedFlight.typeOfMeal=this.dataSelected;
     bookedFlight.meal=this.radioSelected;
+    bookedFlight.gender=this.radioSelected1;
+    bookedFlight.seatNo=this.dataSelected1;
     bookedFlight.passengers=this.passengerList;
      this.bookFlightService.addBookFlight( bookedFlight,this.flightId).subscribe();
      console.log(bookedFlight.typeOfMeal);
      console.log(bookedFlight.meal);
+     console.log(bookedFlight.gender);
+     console.log(bookedFlight.age);
+     console.log(bookedFlight.seatNo);
      alert("Flight Ticket Created");
     // window.location.reload();
 

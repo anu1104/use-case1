@@ -12,13 +12,15 @@ import { Router } from '@angular/router';
 export class SearchScheduledFlightComponent implements OnInit {
 
   show:boolean=false;
-    scheduleFlight:RequestFlightDetailsDTO= new RequestFlightDetailsDTO(0,'','','','','',[],
+    scheduleFlight:RequestFlightDetailsDTO= new RequestFlightDetailsDTO(0,'','','','','','','','',[],
     '','','','');
 
     flightNo : number=0;
 
   constructor(public service: ScheduledFlightService, public router: Router
    ) { }
+
+   
 
   ngOnInit(): void {
    // this.scheduleFlight=new ScheduledFlight();
@@ -37,7 +39,7 @@ export class SearchScheduledFlightComponent implements OnInit {
 
 idValid:boolean=false;
 validateId(){
-    if(this.flightNo>999){
+    if(this.flightNo>9999){
         this.idValid=true;
     }
     else if(this.flightNo<1){

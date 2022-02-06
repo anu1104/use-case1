@@ -27,4 +27,8 @@ export class SearchFlightsService {
         return this.flighIdSource;
     }
 
+    getFlightLogo(flightName:any):any{
+        this.http.get('http://localhost:9191/api/v1.0/admin/flight/image/get/' + flightName);
+    }
+
 }

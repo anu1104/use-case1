@@ -8,7 +8,7 @@
       color: red;
        margin: 10px;
        margin-left: 70px;
-       font-size: 18px;
+       font-size: 16px;
       font-weight: bold;
       padding: 1000px;
     }
@@ -16,7 +16,11 @@
       margin-left:20%;
     }
     .col-md-3 offset-md-9{
-      margin-left:20%;
+      margin-left:80%;
+    }
+    section{
+      background-color: rgb(147, 199, 201);
+      margin-left:80%;
     }
   
     .nav-link active{
@@ -48,13 +52,13 @@
   
         <ul class="nav nav-tabs" role="tablist">
           <li class="nav-item">
-            <a class="nav-link active" data-toggle="tab" href="bookedFlight/searchFlights" (click)="add()">Search Or Book Flight</a>
+            <a class="nav-link active" data-toggle="tab" href="bookedFlight/searchFlights" (click)="add()">SEARCH OR BOOK FLIGHT</a>
           </li>
           <li class="nav-item">         
-             <a class="nav-link" data-toggle="tab" href="bookedFlight/show" (click)="view()">Show or cancel Ticket</a>
+             <a class="nav-link" data-toggle="tab" href="bookedFlight/show" (click)="view()">SHOW TICKET HISTORY</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" data-toggle="tab" href="bookedFlight/search" (click)="search()">Search Booked Ticket</a>
+            <a class="nav-link" data-toggle="tab" href="bookedFlight/search" (click)="search()">SEARCH BOOKED TICKET</a>
           </li>
          <!-- <li class="nav-item">
             <a class="nav-link" data-toggle="tab" href="bookedFlight/modify" (click)="search()">MODIFY</a>
@@ -83,23 +87,43 @@
               <br>
               <label>Journey Date : </label>
               <input type="date" class="form-control" [(ngModel)]="bookedFlight.journeyDate"
-                [ngModelOptions]="{standalone: true}" id="schedule" required>
+              [ngModelOptions]="{standalone: true}"  id="schedule" required>
               <br>
               <label>Source : </label>
-              <input type="text" class="form-control" [(ngModel)]="bookedFlight.source"
-                [ngModelOptions]="{standalone: true}" id="schedule" required>
+              <input type="text" class="form-control" value={{source}} readonly
+                id="schedule" required>
               <br>
               <label>Destination : </label>
-              <input type="text" class="form-control" [(ngModel)]="bookedFlight.destination"
-                [ngModelOptions]="{standalone: true}" id="schedule" required>
+              <input type="text" class="form-control" value={{destination}} readonly
+                id="schedule" required>
               <br>
+
+              <label>Age : </label>
+              <input type="number" class="form-control" [(ngModel)]="bookedFlight.age"
+                  [ngModelOptions]="{standalone: true}" id="schedule" required>
+              <br>
+              <label>Gender : </label>
+              <div *ngFor="let r of radio1">
+                  <input type="radio" name="radioButtons" value="{{r}}" (change)="radioChanged1($event)">
+                  <b>{{r}}</b>
+                </div>
+              <br>
+              <label>Seat No : </label>
+              <div class="dropdown">
+                  <select  class="form-control" (change)="onDataSelected1($event)">
+                        
+                      <option>Choose seat no</option>  
+                      <option *ngFor="let c of seatList">{{c}}</option>  
+                  </select>  
+                  
+                </div>
   
           <label>Add Passengers : </label><br>
   
            <input type="submit" class="confBtn btn btn-success"
            (click)="addPassenger()" value="Add">
   <br><br>
-           
+           <div *ngIf="tableFlag">
            <table border="1" class="table table-striped table-dark">
             <thead class="thead-dark">
                     <th>First Name</th>
@@ -118,7 +142,7 @@
                 </tr>
             </table>
           
-  
+          </div>
   
               <label>No Of Passengers :</label>
               <input type="number" class="form-control" [(ngModel)]="bookedFlight.noOfPassenger"
